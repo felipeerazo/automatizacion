@@ -6,6 +6,8 @@ package Vista;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
@@ -14,13 +16,15 @@ import java.util.logging.Logger;
 public class FormPrincipal extends javax.swing.JFrame {
 
     boolean bandera = true;
-    int caudalMax=10;
+    int caudalMax = 10;
+    private boolean on;
 
     /**
      * Creates new form FormPrincipal
      */
     public FormPrincipal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,85 +37,163 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         panelGraficos1 = new Vista.panelGraficos();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnEncender = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(51, 102, 255));
         setUndecorated(true);
+
+        panelGraficos1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir1.png"))); // NOI18N
+        btnSalir.setBorder(null);
+        btnSalir.setBorderPainted(false);
+        btnSalir.setContentAreaFilled(false);
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+        });
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+
+        btnEncender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/apagado1.png"))); // NOI18N
+        btnEncender.setBorder(null);
+        btnEncender.setBorderPainted(false);
+        btnEncender.setContentAreaFilled(false);
+        btnEncender.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEncenderMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEncenderMouseExited(evt);
+            }
+        });
+        btnEncender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEncenderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelGraficos1Layout = new javax.swing.GroupLayout(panelGraficos1);
         panelGraficos1.setLayout(panelGraficos1Layout);
         panelGraficos1Layout.setHorizontalGroup(
             panelGraficos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
+            .addGroup(panelGraficos1Layout.createSequentialGroup()
+                .addContainerGap(725, Short.MAX_VALUE)
+                .addComponent(btnSalir)
+                .addContainerGap())
+            .addGroup(panelGraficos1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnEncender)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelGraficos1Layout.setVerticalGroup(
             panelGraficos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 318, Short.MAX_VALUE)
+            .addGroup(panelGraficos1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnSalir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 457, Short.MAX_VALUE)
+                .addComponent(btnEncender)
+                .addContainerGap())
         );
-
-        jButton1.setText("Encender");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Apagar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(panelGraficos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+            .addComponent(panelGraficos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(panelGraficos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
+            .addComponent(panelGraficos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        cambiarIcono("../Recursos/salir2.png", btnSalir);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        cambiarIcono("../Recursos/salir1.png", btnSalir);
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        salir();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnEncenderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseEntered
+        if (on) {
+            cambiarIcono("../Recursos/encendido2.png", btnEncender);
+        } else {
+            cambiarIcono("../Recursos/apagado2.png", btnEncender);
+        }
+    }//GEN-LAST:event_btnEncenderMouseEntered
+
+    private void btnEncenderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseExited
+        if (on) {
+            cambiarIcono("../Recursos/encendido1.png", btnEncender);
+        } else {
+            cambiarIcono("../Recursos/apagado1.png", btnEncender);
+        }
+    }//GEN-LAST:event_btnEncenderMouseExited
+
+    private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
+        if (on) {
+            on = false;
+            apagar();
+            cambiarIcono("../Recursos/apagado2.png", btnEncender);
+        } else {
+            on = true;
+            encender();
+            cambiarIcono("../Recursos/encendido2.png", btnEncender);
+        }
+    }//GEN-LAST:event_btnEncenderActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FormPrincipal().setVisible(true);
+            }
+        });
+    }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEncender;
+    private javax.swing.JButton btnSalir;
+    private Vista.panelGraficos panelGraficos1;
+    // End of variables declaration//GEN-END:variables
+
+    private void salir() {
+        bandera = false;
+        System.exit(0);
+    }
+
+    private void encender() {
+        bandera = true;
         new Thread() {
             @Override
             public void run() {
                 while (bandera) {
-                    if(panelGraficos1.tanque.getNivel()>225){
+                    if (panelGraficos1.tanque.getNivel() > 225) {
                         panelGraficos1.q1.setApertura(0);
-                        panelGraficos1.q2.setApertura((float)0.5);
-                    }
-                    else if(panelGraficos1.tanque.getNivel()<150){
-                        panelGraficos1.q1.setApertura((float)0.5);
+                        panelGraficos1.q2.setApertura((float) 0.5);
+                    } else if (panelGraficos1.tanque.getNivel() < 150) {
+                        panelGraficos1.q1.setApertura((float) 0.5);
                         panelGraficos1.q2.setApertura(0);
                     }
-                    panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel()+caudalMax*(panelGraficos1.q1.getApertura()-panelGraficos1.q2.getApertura()));
+                    panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() + caudalMax * (panelGraficos1.q1.getApertura() - panelGraficos1.q2.getApertura()));
                     System.out.println(panelGraficos1.tanque.getNivel());
                     try {
                         Thread.sleep(100);
@@ -122,51 +204,13 @@ public class FormPrincipal extends javax.swing.JFrame {
 
             }
         }.start();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        bandera=false;
-        System.exit(0);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FormPrincipal().setVisible(true);
-            }
-        });
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private Vista.panelGraficos panelGraficos1;
-    // End of variables declaration//GEN-END:variables
+
+    private void cambiarIcono(String ruta, JButton boton) {
+        boton.setIcon(new ImageIcon(getClass().getResource(ruta)));
+    }
+
+    private void apagar() {
+        bandera = false;
+    }
 }
