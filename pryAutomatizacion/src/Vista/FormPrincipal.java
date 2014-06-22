@@ -4,11 +4,17 @@
  */
 package Vista;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Felipe
  */
 public class FormPrincipal extends javax.swing.JFrame {
+
+    boolean bandera = true;
+    int caudalMax=10;
 
     /**
      * Creates new form FormPrincipal
@@ -27,49 +33,102 @@ public class FormPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         panelGraficos1 = new Vista.panelGraficos();
-        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         javax.swing.GroupLayout panelGraficos1Layout = new javax.swing.GroupLayout(panelGraficos1);
         panelGraficos1.setLayout(panelGraficos1Layout);
         panelGraficos1Layout.setHorizontalGroup(
             panelGraficos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 201, Short.MAX_VALUE)
+            .addGap(0, 352, Short.MAX_VALUE)
         );
         panelGraficos1Layout.setVerticalGroup(
             panelGraficos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 218, Short.MAX_VALUE)
+            .addGap(0, 318, Short.MAX_VALUE)
         );
 
-        jLabel1.setText("Holas");
+        jButton1.setText("Encender");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Apagar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(60, 60, 60)
                 .addComponent(panelGraficos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(54, 54, 54))
+                .addGap(32, 32, 32)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
+                        .addContainerGap()
                         .addComponent(panelGraficos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jLabel1)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new Thread() {
+            @Override
+            public void run() {
+                while (bandera) {
+                    if(panelGraficos1.tanque.getNivel()>225){
+                        panelGraficos1.q1.setApertura(0);
+                        panelGraficos1.q2.setApertura((float)0.5);
+                    }
+                    else if(panelGraficos1.tanque.getNivel()<150){
+                        panelGraficos1.q1.setApertura((float)0.5);
+                        panelGraficos1.q2.setApertura(0);
+                    }
+                    panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel()+caudalMax*(panelGraficos1.q1.getApertura()-panelGraficos1.q2.getApertura()));
+                    System.out.println(panelGraficos1.tanque.getNivel());
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            }
+        }.start();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        bandera=false;
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -106,7 +165,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private Vista.panelGraficos panelGraficos1;
     // End of variables declaration//GEN-END:variables
 }

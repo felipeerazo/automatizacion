@@ -6,11 +6,20 @@
 
 package Vista;
 
+import Modelo.Tanque;
+import Modelo.Valvula;
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author Usuario
  */
 public class panelGraficos extends javax.swing.JPanel {
+    
+    Tanque tanque=new Tanque(0, 0, 300);
+    Valvula q1= new Valvula((float) 0.5, 0);
+    Valvula q2= new Valvula((float) 0.5, 0);
 
     /**
      * Creates new form panelGraficos
@@ -18,6 +27,17 @@ public class panelGraficos extends javax.swing.JPanel {
     public panelGraficos() {
         initComponents();
     }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        g.setColor(Color.WHITE);
+        g.drawRect(10, 10, 300, 300);
+        g.setColor(Color.BLUE);
+        g.fillRect(10, (int)(310-tanque.getNivel()), 300, (int)tanque.getNivel());
+        repaint();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,7 +48,7 @@ public class panelGraficos extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(255, 153, 153));
+        setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
