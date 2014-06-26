@@ -68,14 +68,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnEncender.setBorder(null);
         btnEncender.setBorderPainted(false);
         btnEncender.setContentAreaFilled(false);
-        btnEncender.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEncenderMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEncenderMouseExited(evt);
-            }
-        });
         btnEncender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncenderActionPerformed(evt);
@@ -131,31 +123,15 @@ public class FormPrincipal extends javax.swing.JFrame {
         salir();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void btnEncenderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseEntered
-        if (on) {
-            cambiarIcono("../Recursos/encendido2.png", btnEncender);
-        } else {
-            cambiarIcono("../Recursos/apagado2.png", btnEncender);
-        }
-    }//GEN-LAST:event_btnEncenderMouseEntered
-
-    private void btnEncenderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseExited
-        if (on) {
-            cambiarIcono("../Recursos/encendido1.png", btnEncender);
-        } else {
-            cambiarIcono("../Recursos/apagado1.png", btnEncender);
-        }
-    }//GEN-LAST:event_btnEncenderMouseExited
-
     private void btnEncenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncenderActionPerformed
         if (on) {
             on = false;
             apagar();
-            cambiarIcono("../Recursos/apagado2.png", btnEncender);
+            cambiarIcono("../Recursos/apagado1.png", btnEncender);
         } else {
             on = true;
             encender();
-            cambiarIcono("../Recursos/encendido2.png", btnEncender);
+            cambiarIcono("../Recursos/encendido1.png", btnEncender);
         }
     }//GEN-LAST:event_btnEncenderActionPerformed
 

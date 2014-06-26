@@ -30,7 +30,7 @@ public class panelGraficos extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics g) {
-        g.setColor(Color.BLACK);
+        g.setColor(Color.DARK_GRAY);
         g.fillRect(0, 0, 800, 800);        
         g.drawImage(new ImageIcon(getClass().getResource("../Recursos/tanque.png")).getImage(), 40, 40, 500, 500, this);
         g.setColor(new Color(98, 146, 173));
