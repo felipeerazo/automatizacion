@@ -30,13 +30,16 @@ public class panelGraficos extends javax.swing.JPanel {
     
     @Override
     protected void paintComponent(Graphics g) {
+        //color fondo
         g.setColor(Color.DARK_GRAY);
-        g.fillRect(0, 0, 800, 800);        
-        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/tanque.png")).getImage(), 40, 40, 500, 500, this);
-        g.setColor(new Color(98, 146, 173));
-        g.fillRect(144, (int) (430 - tanque.getNivel()), 300, (int) (tanque.getNivel()));
-        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/alcohol1.png")).getImage(), 40, 40, 500, 500, this);        
-        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/alcohol2.png")).getImage(), 40, (int) (40 - tanque.getNivel()), 500, 500, this);       
+        g.fillRect(0, 0, 800, 800);
+        //dibujo tanque
+        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/tanque.png")).getImage(), 10, 40, 500, 500, this);     
+        //dibujo del alcohol
+        g.setColor(new Color(98, 146, 173));//--->color alcohol
+        g.fillRect(114, (int) (430 - tanque.getNivel()), 300, (int) (tanque.getNivel()));//relleno alcohol
+        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/alcohol1.png")).getImage(), 10, 40, 500, 500, this);        
+        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/alcohol2.png")).getImage(), 10, (int) (40 - tanque.getNivel()), 500, 500, this);       
         repaint();
     }
     

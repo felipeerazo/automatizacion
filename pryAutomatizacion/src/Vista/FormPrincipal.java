@@ -39,12 +39,31 @@ public class FormPrincipal extends javax.swing.JFrame {
         panelGraficos1 = new Vista.panelGraficos();
         btnSalir = new javax.swing.JButton();
         btnEncender = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lblTemperatura = new javax.swing.JLabel();
+        lblNivel = new javax.swing.JLabel();
+        lblQ2 = new javax.swing.JLabel();
+        lblQ1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 102, 255));
         setUndecorated(true);
 
         panelGraficos1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        javax.swing.GroupLayout panelGraficos1Layout = new javax.swing.GroupLayout(panelGraficos1);
+        panelGraficos1.setLayout(panelGraficos1Layout);
+        panelGraficos1Layout.setHorizontalGroup(
+            panelGraficos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 541, Short.MAX_VALUE)
+        );
+        panelGraficos1Layout.setVerticalGroup(
+            panelGraficos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir1.png"))); // NOI18N
         btnSalir.setBorder(null);
@@ -74,39 +93,98 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelGraficos1Layout = new javax.swing.GroupLayout(panelGraficos1);
-        panelGraficos1.setLayout(panelGraficos1Layout);
-        panelGraficos1Layout.setHorizontalGroup(
-            panelGraficos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGraficos1Layout.createSequentialGroup()
-                .addContainerGap(725, Short.MAX_VALUE)
-                .addComponent(btnSalir)
-                .addContainerGap())
-            .addGroup(panelGraficos1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnEncender)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelGraficos1Layout.setVerticalGroup(
-            panelGraficos1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGraficos1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnSalir)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 457, Short.MAX_VALUE)
-                .addComponent(btnEncender)
-                .addContainerGap())
-        );
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setText("Temperatura:");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel2.setText("Nivel (m^3):");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel3.setText("Caudal Q1:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Caudal Q2:");
+
+        lblTemperatura.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblTemperatura.setText("0");
+
+        lblNivel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblNivel.setText("0");
+
+        lblQ2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblQ2.setText("0");
+
+        lblQ1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblQ1.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGraficos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelGraficos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEncender))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNivel)
+                            .addComponent(lblQ1)
+                            .addComponent(lblQ2)
+                            .addComponent(lblTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {lblNivel, lblQ1, lblQ2, lblTemperatura});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelGraficos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEncender)
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(lblTemperatura))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblNivel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lblQ1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(lblQ2))
+                        .addGap(0, 401, Short.MAX_VALUE))
+                    .addComponent(panelGraficos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblNivel, lblQ1, lblQ2, lblTemperatura});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -148,6 +226,14 @@ public class FormPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEncender;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblNivel;
+    private javax.swing.JLabel lblQ1;
+    private javax.swing.JLabel lblQ2;
+    private javax.swing.JLabel lblTemperatura;
     private Vista.panelGraficos panelGraficos1;
     // End of variables declaration//GEN-END:variables
 
@@ -170,7 +256,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                         panelGraficos1.q2.setApertura(0);
                     }
                     panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() + caudalMax * (panelGraficos1.q1.getApertura() - panelGraficos1.q2.getApertura()));
-                    System.out.println(panelGraficos1.tanque.getNivel());
+                    lblNivel.setText(String.valueOf(panelGraficos1.tanque.getNivel()));
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException ex) {
