@@ -9,6 +9,7 @@ import Modelo.Tanque;
 import Modelo.Valvula;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
@@ -16,7 +17,7 @@ import javax.swing.ImageIcon;
  * @author Usuario
  */
 public class panelGraficos extends javax.swing.JPanel {
-    
+
     Tanque tanque = new Tanque(0, 0, 300);
     Valvula q1 = new Valvula((float) 0.5, 0);
     Valvula q2 = new Valvula((float) 0.5, 0);
@@ -27,22 +28,30 @@ public class panelGraficos extends javax.swing.JPanel {
     public panelGraficos() {
         initComponents();
     }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
         //color fondo
         g.setColor(Color.DARK_GRAY);
         g.fillRect(0, 0, 800, 800);
+        //tubo del gas
+        g.setColor(Color.BLACK);
+        g.fillRect(200, 470, 117, 30);        
         //dibujo tanque
-        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/tanque.png")).getImage(), 10, 40, 500, 500, this);     
+        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/tanque.png")).getImage(), 10, 40, 500, 500, this);
         //dibujo del alcohol
         g.setColor(new Color(98, 146, 173));//--->color alcohol
         g.fillRect(114, (int) (430 - tanque.getNivel()), 300, (int) (tanque.getNivel()));//relleno alcohol
-        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/alcohol1.png")).getImage(), 10, 40, 500, 500, this);        
-        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/alcohol2.png")).getImage(), 10, (int) (40 - tanque.getNivel()), 500, 500, this);       
+        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/alcohol1.png")).getImage(), 10, 40, 500, 500, this);
+        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/alcohol2.png")).getImage(), 10, (int) (40 - tanque.getNivel()), 500, 500, this);
+        //fuego
+        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/fuego.gif")).getImage(), 248, 460, 25, 32, this);
+        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/fuego.gif")).getImage(), 205, 460, 25, 32, this);
+        g.drawImage(new ImageIcon(getClass().getResource("../Recursos/fuego.gif")).getImage(), 290, 460, 25, 32, this);
         repaint();
+        
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
