@@ -248,12 +248,14 @@ public class FormPrincipal extends javax.swing.JFrame {
             @Override
             public void run() {
                 while (bandera) {
-                    if (panelGraficos1.tanque.getNivel() > 225) {
-                        panelGraficos1.q1.setApertura(0);
+                    if (panelGraficos1.tanque.getNivel() > 223) {
                         panelGraficos1.q2.setApertura((float) 0.5);
+                        panelGraficos1.q1.setApertura(0);
                     } else if (panelGraficos1.tanque.getNivel() < 150) {
-                        panelGraficos1.q1.setApertura((float) 0.5);
                         panelGraficos1.q2.setApertura(0);
+                    }
+                    if (panelGraficos1.q2.getApertura() == 0) {
+                        panelGraficos1.q1.setApertura((float) (1 - (0.0044445 * panelGraficos1.tanque.getNivel())));
                     }
                     panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() + caudalMax * (panelGraficos1.q1.getApertura() - panelGraficos1.q2.getApertura()));
                     lblNivel.setText(String.valueOf(panelGraficos1.tanque.getNivel()));
@@ -274,5 +276,28 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void apagar() {
         bandera = false;
+        panelGraficos1.q1.setApertura(0);
+        new Thread() {
+            @Override
+            public void run() {
+                while (panelGraficos1.tanque.getNivel() > 0 && !bandera) {
+                    if (panelGraficos1.tanque.getNivel() > 75) {
+                        panelGraficos1.q2.setApertura(1);
+                    } else if (panelGraficos1.tanque.getNivel() > 50) {
+                        panelGraficos1.q2.setApertura((float) 0.5);
+                    }
+                    panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() - caudalMax * panelGraficos1.q2.getApertura());
+                    lblNivel.setText(String.valueOf(panelGraficos1.tanque.getNivel()));
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                panelGraficos1.tanque.setNivel(0);
+                panelGraficos1.q2.setApertura(0);
+                lblNivel.setText("0.0");
+            }
+        }.start();
     }
 }

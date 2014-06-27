@@ -9,7 +9,6 @@ import Modelo.Tanque;
 import Modelo.Valvula;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
 import javax.swing.ImageIcon;
 
 /**
@@ -36,7 +35,7 @@ public class panelGraficos extends javax.swing.JPanel {
         g.fillRect(0, 0, 800, 800);
         //tubo del gas
         g.setColor(Color.BLACK);
-        g.fillRect(200, 470, 117, 30);        
+        g.fillRect(200, 470, 117, 30);
         //dibujo tanque
         g.drawImage(new ImageIcon(getClass().getResource("../Recursos/tanque.png")).getImage(), 10, 40, 500, 500, this);
         //dibujo del alcohol
@@ -48,8 +47,12 @@ public class panelGraficos extends javax.swing.JPanel {
         g.drawImage(new ImageIcon(getClass().getResource("../Recursos/fuego.gif")).getImage(), 248, 460, 25, 32, this);
         g.drawImage(new ImageIcon(getClass().getResource("../Recursos/fuego.gif")).getImage(), 205, 460, 25, 32, this);
         g.drawImage(new ImageIcon(getClass().getResource("../Recursos/fuego.gif")).getImage(), 290, 460, 25, 32, this);
+
+        //dibujo valores de las aperturas de las válvulas
+        g.setColor(Color.WHITE);
+        g.drawString(String.valueOf(q1.getApertura() * 100), 60, 80);
+        g.drawString(String.valueOf(q2.getApertura() * 100), 450, 400);
         repaint();
-        
     }
 
     @SuppressWarnings("unchecked")
@@ -69,8 +72,6 @@ public class panelGraficos extends javax.swing.JPanel {
             .addGap(0, 452, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
