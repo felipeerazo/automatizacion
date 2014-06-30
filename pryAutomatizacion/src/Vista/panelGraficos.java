@@ -25,6 +25,8 @@ public class panelGraficos extends javax.swing.JPanel {
     ImageIcon imagenNivelSuperior;
     ImageIcon imagenNivelInferior;
     ImageIcon imagenQ2;
+    ImageIcon imagenQ1;
+    ImageIcon chorro;
 
     /**
      * Creates new form panelGraficos
@@ -35,6 +37,7 @@ public class panelGraficos extends javax.swing.JPanel {
         imagenNivelSuperior = new ImageIcon(getClass().getResource("../Recursos/alcohol1.png"));
         imagenNivelInferior = new ImageIcon(getClass().getResource("../Recursos/alcohol2.png"));
         imagenFuego = new ImageIcon(getClass().getResource("../Recursos/fuego.gif"));
+        chorro = new ImageIcon(getClass().getResource("../Recursos/chorro.gif"));
     }
 
     @Override
@@ -64,10 +67,18 @@ public class panelGraficos extends javax.swing.JPanel {
         g.drawString(String.valueOf(q2.getApertura() * 100), 450, 400);
         if (q1.getApertura() > 0 || tanque.getNivel() == 0) {
             imagenQ2 = new ImageIcon(getClass().getResource("../Recursos/g2Cerrada.png"));
+            imagenQ1 = new ImageIcon(getClass().getResource("../Recursos/g1Abierta.gif"));
+            if (tanque.getNivel() == 0) {
+                imagenQ1 = new ImageIcon(getClass().getResource("../Recursos/g1Cerrada.png"));
+            } else {
+                g.drawImage(chorro.getImage(), 124, 182, 13, (int) (250 - tanque.getNivel()), this);
+            }
         } else if (tanque.getNivel() != 0) {
             imagenQ2 = new ImageIcon(getClass().getResource("../Recursos/g2Abierta.gif"));
+            imagenQ1 = new ImageIcon(getClass().getResource("../Recursos/g1Cerrada.png"));
         }
         g.drawImage(imagenQ2.getImage(), 10, 40, 500, 500, this);
+        g.drawImage(imagenQ1.getImage(), 10, 40, 500, 500, this);
         repaint();
     }
 
