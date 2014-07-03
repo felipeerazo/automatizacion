@@ -9,6 +9,7 @@ import Modelo.Tanque;
 import Modelo.Valvula;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 
 /**
@@ -63,8 +64,8 @@ public class panelGraficos extends javax.swing.JPanel {
         }
         //dibujo valores de las aperturas de las válvulas
         g.setColor(Color.WHITE);
-        g.drawString(String.valueOf(q1.getApertura() * 100), 60, 80);
-        g.drawString(String.valueOf(q2.getApertura() * 100), 450, 400);
+        g.drawString(formatearAperturaQ1(q1.getApertura()), 60, 80);
+        g.drawString(formatearAperturaQ2(q2.getApertura()), 450, 400);
         if (q1.getApertura() > 0 || tanque.getNivel() == 0) {
             imagenQ2 = new ImageIcon(getClass().getResource("../Recursos/g2Cerrada.png"));
             imagenQ1 = new ImageIcon(getClass().getResource("../Recursos/g1Abierta.gif"));
@@ -80,6 +81,21 @@ public class panelGraficos extends javax.swing.JPanel {
         g.drawImage(imagenQ2.getImage(), 10, 40, 500, 500, this);
         g.drawImage(imagenQ1.getImage(), 10, 40, 500, 500, this);
         repaint();
+    }
+
+    public String formatearAperturaQ1(float i) {
+        return String.valueOf(new DecimalFormat("0.00").format(i * 100)) + "%";
+    }
+
+    public String formatearAperturaQ2(float i) {
+        i=i * 100;
+        if (i == 100.0) {
+            return "Abierta";
+        }
+        if (i == 50.0) {
+            return "Media";
+        }
+        return "Cerrada";
     }
 
     @SuppressWarnings("unchecked")

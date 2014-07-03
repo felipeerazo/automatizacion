@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.DAORegistros;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -18,10 +19,13 @@ public class FormPrincipal extends javax.swing.JFrame {
     boolean bandera = true;
     int caudalMax = 10;
     private boolean on;
+    DAORegistros dao= new DAORegistros();
+    FormRegistros fRegistros= new FormRegistros();
 
     public FormPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+        insertar();
     }
 
     @SuppressWarnings("unchecked")
@@ -41,6 +45,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         lblQ2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnEncender = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 102, 255));
@@ -116,6 +121,13 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Registros");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ContenedorInfoLayout = new javax.swing.GroupLayout(ContenedorInfo);
         ContenedorInfo.setLayout(ContenedorInfoLayout);
         ContenedorInfoLayout.setHorizontalGroup(
@@ -126,17 +138,20 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContenedorInfoLayout.createSequentialGroup()
                 .addContainerGap(38, Short.MAX_VALUE)
-                .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addGap(27, 27, 27)
-                .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNivel)
-                    .addComponent(lblQ1)
-                    .addComponent(lblQ2)
-                    .addComponent(lblTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1)
+                    .addGroup(ContenedorInfoLayout.createSequentialGroup()
+                        .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
+                        .addGap(27, 27, 27)
+                        .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNivel)
+                            .addComponent(lblQ1)
+                            .addComponent(lblQ2)
+                            .addComponent(lblTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(29, 29, 29))
         );
 
@@ -165,7 +180,9 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lblQ2))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(30, 30, 30))
         );
 
         ContenedorInfoLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel1, jLabel2, jLabel3, jLabel4});
@@ -238,6 +255,12 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEncenderActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        fRegistros.llenarTabla();
+        fRegistros.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -245,6 +268,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormPrincipal().setVisible(true);
+                
+                
             }
         });
     }
@@ -253,6 +278,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel ContenedorInfo;
     private javax.swing.JButton btnEncender;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -327,4 +353,26 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         }.start();
     }
+
+    private void insertar() {
+        
+    new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while(true){
+                    sleep(10000);
+                    String temperatura= lblTemperatura.getText();
+                    String nivel= lblNivel.getText();
+                    String caudal_q1= lblQ1.getText();
+                    String caudal_q2= lblQ2.getText();
+                    System.out.println(dao.insertar(temperatura, nivel, caudal_q1, caudal_q2));
+                } }catch (InterruptedException ex) {
+                    Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+            }
+        }.start();
+}
 }
