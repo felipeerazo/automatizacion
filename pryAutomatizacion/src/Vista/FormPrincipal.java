@@ -66,7 +66,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        panelGraficos1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelGraficos1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
 
         javax.swing.GroupLayout panelGraficos1Layout = new javax.swing.GroupLayout(panelGraficos1);
         panelGraficos1.setLayout(panelGraficos1Layout);
@@ -80,7 +80,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         );
 
         ContenedorInfo.setBackground(new java.awt.Color(157, 174, 191));
-        ContenedorInfo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ContenedorInfo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("Temperatura:");
@@ -195,7 +195,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addGroup(BackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panelGraficos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ContenedorInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addContainerGap())
         );
