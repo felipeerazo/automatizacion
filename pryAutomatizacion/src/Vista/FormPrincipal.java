@@ -11,16 +11,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
- *
- * @author Felipe
+ * @author Dahiana Andrea Barreto
+ * @author David Asaaf Vergara Almanza
+ * @author Felipe Erazo Guerrero
  */
 public class FormPrincipal extends javax.swing.JFrame {
 
     boolean bandera = true;
     int caudalMax = 10;
     private boolean on;
-    DAORegistros dao= new DAORegistros();
-    FormRegistros fRegistros= new FormRegistros();
+    DAORegistros dao = new DAORegistros();
+    FormRegistros fRegistros = new FormRegistros();
 
     public FormPrincipal() {
         initComponents();
@@ -45,7 +46,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         lblQ2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnEncender = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnRegistros = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 102, 255));
@@ -121,10 +122,10 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Registros");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistros.setText("Registros");
+        btnRegistros.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegistrosActionPerformed(evt);
             }
         });
 
@@ -139,7 +140,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContenedorInfoLayout.createSequentialGroup()
                 .addContainerGap(38, Short.MAX_VALUE)
                 .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1)
+                    .addComponent(btnRegistros)
                     .addGroup(ContenedorInfoLayout.createSequentialGroup()
                         .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -181,7 +182,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(lblQ2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnRegistros)
                 .addGap(30, 30, 30))
         );
 
@@ -255,11 +256,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEncenderActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrosActionPerformed
         // TODO add your handling code here:
         fRegistros.llenarTabla();
         fRegistros.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegistrosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -268,8 +269,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormPrincipal().setVisible(true);
-                
-                
+
             }
         });
     }
@@ -277,8 +277,8 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel Background;
     private javax.swing.JPanel ContenedorInfo;
     private javax.swing.JButton btnEncender;
+    private javax.swing.JButton btnRegistros;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -355,24 +355,23 @@ public class FormPrincipal extends javax.swing.JFrame {
     }
 
     private void insertar() {
-        
-    new Thread() {
+
+        new Thread() {
             @Override
             public void run() {
                 try {
-                    while(true){
-                    sleep(10000);
-                    String temperatura= lblTemperatura.getText();
-                    String nivel= lblNivel.getText();
-                    String caudal_q1= lblQ1.getText();
-                    String caudal_q2= lblQ2.getText();
-                    System.out.println(dao.insertar(temperatura, nivel, caudal_q1, caudal_q2));
-                } }catch (InterruptedException ex) {
+                    while (true) {
+                        sleep(10000);
+                        String temperatura = lblTemperatura.getText();
+                        String nivel = lblNivel.getText();
+                        String caudal_q1 = lblQ1.getText();
+                        String caudal_q2 = lblQ2.getText();
+                        System.out.println(dao.insertar(temperatura, nivel, caudal_q1, caudal_q2));
+                    }
+                } catch (InterruptedException ex) {
                     Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                
             }
         }.start();
-}
+    }
 }

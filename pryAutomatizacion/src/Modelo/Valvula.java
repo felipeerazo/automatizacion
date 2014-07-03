@@ -7,8 +7,9 @@
 package Modelo;
 
 /**
- *
- * @author Usuario
+ * @author Dahiana Andrea Barreto
+ * @author David Asaaf Vergara Almanza
+ * @author Felipe Erazo Guerrero
  */
 public class Valvula {
     

@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Clase ControlBD. Encargada de realizar las conecciones con la base de datos.
  */
 package Controlador;
 
@@ -12,16 +11,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
- * @author Felipe
+ * @author Dahiana Andrea Barreto
+ * @author David Asaaf Vergara Almanza
+ * @author Felipe Erazo Guerrero
  */
-public class ControlBD implements Serializable{
+public final class ControlBD implements Serializable {
 
     ResultSet res = null;
     private Connection con = null;
     Statement st = null;
     String driver = "org.postgresql.Driver";
-    String url = "jdbc:postgresql://127.0.0.1:5433/bd_automatizacion";
+    String url = "jdbc:postgresql://127.0.0.1:5432/bd_automatizacion";
     String userDB = "postgres";
     String passDB = "admin";
 
@@ -29,7 +29,12 @@ public class ControlBD implements Serializable{
         conectar();
     }
 
-    public int conectar() {
+    /**
+     * Metodo Conectar. Crea la conexión a la base de datos
+     *
+     * @return valor de la excepción en caso de que exista tal excepción.
+     */
+    private int conectar() {
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
@@ -45,8 +50,14 @@ public class ControlBD implements Serializable{
         }
         return 1;
     }
-    
-    public SQLException insertar(String sql) {
+
+    /**
+     * Metodo Insertar: inserta en la base de datos.
+     *
+     * @param sql. Consulta que se realiza en la base de datos
+     * @return valor de la excepción en caso de que exista tal excepción.
+     */
+    private SQLException insertar(String sql) {//------------------------------------->SIN USO
         try {
             st = getCon().createStatement();
             st.execute(sql);
@@ -57,55 +68,73 @@ public class ControlBD implements Serializable{
         }
     }
 
-    public ResultSet consultar(String sql){
-         try{
-            st=getCon().createStatement();
-            res= st.executeQuery(sql);
-         }
-        catch(SQLException e){
+    /**
+     * Metodo Consultar. Ejecuta una consulta sql en la base de datos
+     *
+     * @param sql. Consulta
+     * @return. El resultado de la consulta
+     */
+    public ResultSet consultar(String sql) {
+        try {
+            st = getCon().createStatement();
+            res = st.executeQuery(sql);
+        } catch (SQLException e) {
             return null;
         }
-         return res;
-     }
-    
-    
-    public int verificar(String sql){
-        try{
-            st=getCon().createStatement();
-            res= st.executeQuery(sql);
-            if (res.next())
+        return res;
+    }
+
+    /**
+     * Metodo Verificar:
+     *
+     * @param sql
+     * @return
+     */
+    private int verificar(String sql) {//--------------------------------------->SIN USO
+        try {
+            st = getCon().createStatement();
+            res = st.executeQuery(sql);
+            if (res.next()) {
                 return 1;
+            }
             st.close();
-             }
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return -1;
     }
-    
+
     /**
-     * @return the con
+     * Metodo getCon: Obtiene la conexión.
+     *
+     * @return la conexión
      */
     public Connection getCon() {
         return con;
     }
 
     /**
-     * @param con the con to set
+     * Metodo setCon: Modifica la conexión.
+     *
+     * @param con el valor de la conexión que será modificado
      */
     public void setCon(Connection con) {
         this.con = con;
     }
-    
-     
-    public int actualizar(String sql){
-        try{
-            st=getCon().createStatement();
+
+    /**
+     * Metodo actualizar
+     *
+     * @param sql
+     * @return
+     */
+    public int actualizar(String sql) {
+        try {
+            st = getCon().createStatement();
             st.executeUpdate(sql);
             st.close();
             return 1;
-         }
-        catch(SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return -1;

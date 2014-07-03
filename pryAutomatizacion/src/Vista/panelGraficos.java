@@ -13,8 +13,9 @@ import java.text.DecimalFormat;
 import javax.swing.ImageIcon;
 
 /**
- *
- * @author Usuario
+ * @author Dahiana Andrea Barreto
+ * @author David Asaaf Vergara Almanza
+ * @author Felipe Erazo Guerrero
  */
 public class panelGraficos extends javax.swing.JPanel {
 
@@ -88,7 +89,7 @@ public class panelGraficos extends javax.swing.JPanel {
     }
 
     public String formatearAperturaQ2(float i) {
-        i=i * 100;
+        i = i * 100;
         if (i == 100.0) {
             return "Abierta";
         }

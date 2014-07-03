@@ -1,17 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Clase registro.
  */
-
 package Modelo;
 
 /**
- *
- * @author Usuario
+ * @author Dahiana Andrea Barreto
+ * @author David Asaaf Vergara Almanza
+ * @author Felipe Erazo Guerrero
  */
 public class Registro {
- 
+
     private String temperatura;
     private String nivelTanque;
     private String caudal_q1;
@@ -21,6 +19,15 @@ public class Registro {
     public Registro() {
     }
 
+    /**
+     * Constructor de Clase: Crea un nuevo registro
+     *
+     * @param temperatura
+     * @param nivelTanque
+     * @param caudal_q1
+     * @param caudal_q2
+     * @param fecha
+     */
     public Registro(String temperatura, String nivelTanque, String caudal_q1, String caudal_q2, String fecha) {
         this.temperatura = temperatura;
         this.nivelTanque = nivelTanque;
@@ -30,74 +37,95 @@ public class Registro {
     }
 
     /**
-     * @return the temperatura
+     * Metodo getTemperatura: Obtiene la temperatura en el registro.
+     *
+     * @return la temperatura
      */
     public String getTemperatura() {
         return temperatura;
     }
 
     /**
-     * @param temperatura the temperatura to set
+     * Metodo setTemparutura: Modifica la temperatura en el registro
+     *
+     * @param temperatura. Nuevo valor de la temperatura a ser modificado.
      */
     public void setTemperatura(String temperatura) {
         this.temperatura = temperatura;
     }
 
     /**
-     * @return the nivelTanque
+     * Metodo getNivelTanque: Obtiene el valor del nivel del tanque en el
+     * registro.
+     *
+     * @return el nivelTanque
      */
     public String getNivelTanque() {
         return nivelTanque;
     }
 
     /**
-     * @param nivelTanque the nivelTanque to set
+     * Metodo setNivelTanque: Modifica el valor del nivel del tanque en el
+     * registro.
+     *
+     * @param nivelTanque nuevo valor de nivel para el tanque.
      */
     public void setNivelTanque(String nivelTanque) {
         this.nivelTanque = nivelTanque;
     }
 
     /**
-     * @return the caudal_q1
+     * Metodo setCaudal_q1: Obtiene el valor del caudal en q1.
+     *
+     * @return caudal_q1
      */
     public String getCaudal_q1() {
         return caudal_q1;
     }
 
     /**
-     * @param caudal_q1 the caudal_q1 to set
+     * Metodo setCaudal_q1: Modifica el caudal de q1 en el registro.
+     *
+     * @param caudal_q1 nuevo valor para el caudal en q1
      */
     public void setCaudal_q1(String caudal_q1) {
         this.caudal_q1 = caudal_q1;
     }
 
     /**
-     * @return the caudal_q2
+     * Metodo getCaudal_q2: Obtiene el caudal para q2 en el registro.
+     *
+     * @return caudal_q2
      */
     public String getCaudal_q2() {
         return caudal_q2;
     }
 
     /**
-     * @param caudal_q2 the caudal_q2 to set
+     * Metodo setCaudal_q2: Modifica el caudal para q2 en el registro.
+     *
+     * @param caudal_q2 nuevo valor de q2 a modificar en el registro.
      */
     public void setCaudal_q2(String caudal_q2) {
         this.caudal_q2 = caudal_q2;
     }
 
     /**
-     * @return the fecha
+     * Metodo getFecha: Obtiene la fecha
+     *
+     * @return fecha
      */
     public String getFecha() {
         return fecha;
     }
 
     /**
-     * @param fecha the fecha to set
+     * Metodo setFecha: Modifica la fecha
+     *
+     * @param fecha valor de fecha a modificar
      */
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-    
-    
+
 }
