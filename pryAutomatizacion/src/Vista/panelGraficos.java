@@ -55,7 +55,7 @@ public class panelGraficos extends javax.swing.JPanel {
         g.fillRect(200, 470, 117, 30);
         //dibujo tanque
         g.drawImage(imagenTanque.getImage(), 10, 40, 500, 500, this);
-        //dibujo del alcohol
+        //dibujo del alcohol        
         g.setColor(new Color(98, 146, 173));//--->color alcohol
         g.fillRect(114, (int) (430 - tanque.getNivel()), 300, (int) (tanque.getNivel()));//relleno alcohol
         g.drawImage(imagenNivelSuperior.getImage(), 10, 40, 500, 500, this);
@@ -82,11 +82,11 @@ public class panelGraficos extends javax.swing.JPanel {
             imagenQ2 = new ImageIcon(getClass().getResource("../Recursos/g2Abierta.gif"));
             imagenQ1 = new ImageIcon(getClass().getResource("../Recursos/g1Cerrada.png"));
         }
+        g.drawImage(imagenQ2.getImage(), 10, 40, 500, 500, this);
+        g.drawImage(imagenQ1.getImage(), 10, 40, 500, 500, this);
         if (alcoholHirviendo != null) {
             g.drawImage(alcoholHirviendo.getImage(), 10, (int) (40 - tanque.getNivel()), 500, 500, this);
         }
-        g.drawImage(imagenQ2.getImage(), 10, 40, 500, 500, this);
-        g.drawImage(imagenQ1.getImage(), 10, 40, 500, 500, this);
         repaint();
     }
 
@@ -126,7 +126,14 @@ public class panelGraficos extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     void bajarTemperatura() {
+        System.out.println("bajo temperatura");
         altoFuego = 22;
         xFuego = 470;
+    }
+    
+    void aumentarTemperatura() {
+        System.out.println("bajo temperatura");
+        altoFuego = 32;
+        xFuego = 460;
     }
 }

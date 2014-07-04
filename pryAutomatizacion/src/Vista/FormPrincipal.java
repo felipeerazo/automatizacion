@@ -17,7 +17,7 @@ import javax.swing.JButton;
  * @author Felipe Erazo Guerrero
  */
 public class FormPrincipal extends javax.swing.JFrame {
-
+    
     boolean bandera = true;
     int caudalMax = 10;
     private boolean on;
@@ -27,14 +27,14 @@ public class FormPrincipal extends javax.swing.JFrame {
     private boolean bandera2 = true;
     boolean hervir = false;
     boolean banderaHervir = true;
-
+    
     public FormPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
         insertar();
         hervir();
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -299,7 +299,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormPrincipal().setVisible(true);
-
+                
             }
         });
     }
@@ -330,7 +330,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private void encender() {
         bandera = true;
         new Thread() {
@@ -357,15 +357,15 @@ public class FormPrincipal extends javax.swing.JFrame {
                         Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-
+                
             }
         }.start();
     }
-
+    
     private void cambiarIcono(String ruta, JButton boton) {
         boton.setIcon(new ImageIcon(getClass().getResource(ruta)));
     }
-
+    
     private void apagar() {
         bandera = false;
         panelGraficos1.q1.setApertura(0);
@@ -392,12 +392,13 @@ public class FormPrincipal extends javax.swing.JFrame {
                 //panelGraficos1.q2.setApertura(0);                
                 lblNivel.setText("0.0");
                 lblQ2.setText("0.0");
+                lblTemperatura.setText("0.0");
             }
         }.start();
     }
-
+    
     private void insertar() {
-
+        
         new Thread() {
             @Override
             public void run() {
@@ -416,7 +417,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         }.start();
     }
-
+    
     private void hervir() {
         new Thread() {
             @Override
@@ -447,7 +448,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         }.start();
     }
-
+    
     private void calcularTemperatura() {
         if (bandera2) {
             i++;
@@ -455,15 +456,16 @@ public class FormPrincipal extends javax.swing.JFrame {
             i--;
         }
         panelGraficos1.tanque.setTemperatura((float) (14.512 * i) / panelGraficos1.tanque.getNivel() + 25);
-        if (panelGraficos1.tanque.getTemperatura() > (float) 100) {
+        if (panelGraficos1.tanque.getTemperatura() > (float) 100 && panelGraficos1.tanque.getNivel() != 0) {
             bandera2 = false;
             panelGraficos1.bajarTemperatura();
         }
-        if (panelGraficos1.tanque.getTemperatura() > 78 && panelGraficos1.tanque.getNivel() != 0) {
+        if (panelGraficos1.tanque.getTemperatura() > 78.4 && panelGraficos1.tanque.getNivel() != 0) {
             panelGraficos1.imagenTanque = new ImageIcon(getClass().getResource("../Recursos/tanqueCaliente.png"));
             panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() - ((float) 0.00411 * i));
         }
         if (panelGraficos1.tanque.getTemperatura() < 60) {
+            panelGraficos1.aumentarTemperatura();
             bandera2 = true;
         }
         lblTemperatura.setText(String.valueOf(panelGraficos1.tanque.getTemperatura()));
