@@ -5,6 +5,7 @@
 package Vista;
 
 import Modelo.DAORegistros;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -22,11 +23,16 @@ public class FormPrincipal extends javax.swing.JFrame {
     private boolean on;
     DAORegistros dao = new DAORegistros();
     FormRegistros fRegistros = new FormRegistros();
+    int i = 0;
+    private boolean bandera2 = true;
+    boolean hervir = false;
+    boolean banderaHervir = true;
 
     public FormPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
         insertar();
+        hervir();
     }
 
     @SuppressWarnings("unchecked")
@@ -315,8 +321,14 @@ public class FormPrincipal extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void salir() {
-        bandera = false;
-        System.exit(0);
+        try {
+            bandera = false;
+            banderaHervir = false;
+            dao.getConn().cerrarConexion();
+            System.exit(0);
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void encender() {
@@ -325,6 +337,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             @Override
             public void run() {
                 while (bandera) {
+                    calcularTemperatura();
                     if (panelGraficos1.tanque.getNivel() > 223) {
                         panelGraficos1.q2.setApertura((float) 0.5);
                         panelGraficos1.q1.setApertura(0);
@@ -404,28 +417,55 @@ public class FormPrincipal extends javax.swing.JFrame {
         }.start();
     }
 
-    private void hervir(final boolean hervir) {
+    private void hervir() {
         new Thread() {
             @Override
             public void run() {
                 int i = 1;
-                panelGraficos1.imagenTanque = new ImageIcon(getClass().getResource("../Recursos/tanqueCaliente.png"));
                 try {
-                    while (hervir) {
-                        sleep(100);
-                        if (i <= 16) {
-                            panelGraficos1.alcoholHirviendo = new ImageIcon(getClass().getResource("../Recursos/SpritesAguaHirviendo/" + i + ".png"));
-                            i++;
+                    while (banderaHervir) {
+                        if (panelGraficos1.tanque.getTemperatura() > 78 && panelGraficos1.tanque.getNivel() != 0) {
+                            sleep(100);
+                            if (i <= 16) {
+                                panelGraficos1.alcoholHirviendo = new ImageIcon(getClass().getResource("../Recursos/SpritesAguaHirviendo/" + i + ".png"));
+                                i++;
+                            } else {
+                                i = 1;
+                            }
                         } else {
-                            i = 1;
+                            panelGraficos1.alcoholHirviendo = null;
+                            panelGraficos1.imagenTanque = new ImageIcon(getClass().getResource("../Recursos/tanque.png"));
+                            panelGraficos1.imagenNivelSuperior = new ImageIcon(getClass().getResource("../Recursos/alcohol2.png"));
                         }
                     }
                     panelGraficos1.alcoholHirviendo = null;
                     panelGraficos1.imagenTanque = new ImageIcon(getClass().getResource("../Recursos/tanque.png"));
+                    panelGraficos1.imagenNivelSuperior = new ImageIcon(getClass().getResource("../Recursos/alcohol2.png"));
                 } catch (InterruptedException ex) {
                     Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }.start();
+    }
+
+    private void calcularTemperatura() {
+        if (bandera2) {
+            i++;
+        } else {
+            i--;
+        }
+        panelGraficos1.tanque.setTemperatura((float) (14.512 * i) / panelGraficos1.tanque.getNivel() + 25);
+        if (panelGraficos1.tanque.getTemperatura() > (float) 100) {
+            bandera2 = false;
+            panelGraficos1.bajarTemperatura();
+        }
+        if (panelGraficos1.tanque.getTemperatura() > 78 && panelGraficos1.tanque.getNivel() != 0) {
+            panelGraficos1.imagenTanque = new ImageIcon(getClass().getResource("../Recursos/tanqueCaliente.png"));
+            panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() - ((float) 0.00411 * i));
+        }
+        if (panelGraficos1.tanque.getTemperatura() < 60) {
+            bandera2 = true;
+        }
+        lblTemperatura.setText(String.valueOf(panelGraficos1.tanque.getTemperatura()));
     }
 }

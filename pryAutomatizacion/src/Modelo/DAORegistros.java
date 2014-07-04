@@ -16,8 +16,8 @@ import java.util.logging.Logger;
  */
 public class DAORegistros {
 
-    ControlBD conn = new ControlBD();
-    LinkedList<Registro> registros = new LinkedList<>();
+    private ControlBD conn = new ControlBD();
+    private LinkedList<Registro> registros = new LinkedList<>();
 
     /**
      * Metodo Insertar
@@ -31,7 +31,7 @@ public class DAORegistros {
      */
     public String insertar(String temperatura, String nivel, String caudal_q1, String caudal_q2) {
         String sql = "INSERT INTO registros (temperatura, nivel, caudal_q1, caudal_q2, fecha) VALUES ('" + temperatura + "','" + nivel + "','" + caudal_q1 + "','" + caudal_q2 + "',localtimestamp);";
-        if (conn.actualizar(sql) == 1) {
+        if (getConn().actualizar(sql) == 1) {
             return "Registrado";
         }
         return "Error";
@@ -47,14 +47,30 @@ public class DAORegistros {
         try {
             java.sql.ResultSet rs;
             String sql = "select * from registros;";
-            rs = conn.consultar(sql);
+            rs = getConn().consultar(sql);
             while (rs.next()) {
-                registros.add(new Registro(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+                getRegistros().add(new Registro(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Registro.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return getRegistros();
+    }
+
+    public ControlBD getConn() {
+        return conn;
+    }
+
+    public void setConn(ControlBD conn) {
+        this.conn = conn;
+    }
+
+    public LinkedList<Registro> getRegistros() {
         return registros;
+    }
+
+    public void setRegistros(LinkedList<Registro> registros) {
+        this.registros = registros;
     }
 
 }

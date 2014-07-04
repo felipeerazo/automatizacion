@@ -50,6 +50,10 @@ public final class ControlBD implements Serializable {
         }
         return 1;
     }
+    
+    public void cerrarConexion() throws SQLException{
+        con.close();
+    }
 
     /**
      * Metodo Insertar: inserta en la base de datos.
