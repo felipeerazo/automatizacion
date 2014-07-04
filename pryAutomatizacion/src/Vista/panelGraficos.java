@@ -29,6 +29,7 @@ public class panelGraficos extends javax.swing.JPanel {
     ImageIcon imagenQ2;
     ImageIcon imagenQ1;
     ImageIcon chorro;
+    ImageIcon alcoholHirviendo;
 
     /**
      * Creates new form panelGraficos
@@ -78,6 +79,9 @@ public class panelGraficos extends javax.swing.JPanel {
         } else if (tanque.getNivel() != 0) {
             imagenQ2 = new ImageIcon(getClass().getResource("../Recursos/g2Abierta.gif"));
             imagenQ1 = new ImageIcon(getClass().getResource("../Recursos/g1Cerrada.png"));
+        }
+        if (alcoholHirviendo != null) {
+            g.drawImage(alcoholHirviendo.getImage(), 10, (int) (40 - tanque.getNivel()), 500, 500, this);
         }
         g.drawImage(imagenQ2.getImage(), 10, 40, 500, 500, this);
         g.drawImage(imagenQ1.getImage(), 10, 40, 500, 500, this);

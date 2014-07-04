@@ -116,6 +116,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnEncender.setBorder(null);
         btnEncender.setBorderPainted(false);
         btnEncender.setContentAreaFilled(false);
+        btnEncender.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEncenderMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEncenderMouseExited(evt);
+            }
+        });
         btnEncender.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEncenderActionPerformed(evt);
@@ -262,6 +270,22 @@ public class FormPrincipal extends javax.swing.JFrame {
         fRegistros.setVisible(true);
     }//GEN-LAST:event_btnRegistrosActionPerformed
 
+    private void btnEncenderMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseEntered
+        if (!on) {
+            cambiarIcono("../Recursos/apagado2.png", btnEncender);
+        } else {
+            cambiarIcono("../Recursos/encendido2.png", btnEncender);
+        }
+    }//GEN-LAST:event_btnEncenderMouseEntered
+
+    private void btnEncenderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEncenderMouseExited
+        if (!on) {
+            cambiarIcono("../Recursos/apagado1.png", btnEncender);
+        } else {
+            cambiarIcono("../Recursos/encendido1.png", btnEncender);
+        }
+    }//GEN-LAST:event_btnEncenderMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -312,6 +336,8 @@ public class FormPrincipal extends javax.swing.JFrame {
                     }
                     panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() + caudalMax * (panelGraficos1.q1.getApertura() - panelGraficos1.q2.getApertura()));
                     lblNivel.setText(String.valueOf(panelGraficos1.tanque.getNivel()));
+                    lblQ1.setText(String.valueOf(panelGraficos1.q1.getApertura() * caudalMax));
+                    lblQ2.setText(String.valueOf(panelGraficos1.q2.getApertura() * caudalMax));
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException ex) {
@@ -341,6 +367,8 @@ public class FormPrincipal extends javax.swing.JFrame {
                     }
                     panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() - caudalMax * panelGraficos1.q2.getApertura());
                     lblNivel.setText(String.valueOf(panelGraficos1.tanque.getNivel()));
+                    lblQ1.setText(String.valueOf(caudalMax * panelGraficos1.q1.getApertura()));
+                    lblQ2.setText(String.valueOf(caudalMax * panelGraficos1.q2.getApertura()));
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException ex) {
@@ -348,8 +376,9 @@ public class FormPrincipal extends javax.swing.JFrame {
                     }
                 }
                 panelGraficos1.tanque.setNivel(0);
-                panelGraficos1.q2.setApertura(0);
+                //panelGraficos1.q2.setApertura(0);                
                 lblNivel.setText("0.0");
+                lblQ2.setText("0.0");
             }
         }.start();
     }
@@ -368,6 +397,31 @@ public class FormPrincipal extends javax.swing.JFrame {
                         String caudal_q2 = lblQ2.getText();
                         System.out.println(dao.insertar(temperatura, nivel, caudal_q1, caudal_q2));
                     }
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }.start();
+    }
+
+    private void hervir(final boolean hervir) {
+        new Thread() {
+            @Override
+            public void run() {
+                int i = 1;
+                panelGraficos1.imagenTanque = new ImageIcon(getClass().getResource("../Recursos/tanqueCaliente.png"));
+                try {
+                    while (hervir) {
+                        sleep(100);
+                        if (i <= 16) {
+                            panelGraficos1.alcoholHirviendo = new ImageIcon(getClass().getResource("../Recursos/SpritesAguaHirviendo/" + i + ".png"));
+                            i++;
+                        } else {
+                            i = 1;
+                        }
+                    }
+                    panelGraficos1.alcoholHirviendo = null;
+                    panelGraficos1.imagenTanque = new ImageIcon(getClass().getResource("../Recursos/tanque.png"));
                 } catch (InterruptedException ex) {
                     Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
