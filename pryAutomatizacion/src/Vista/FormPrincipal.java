@@ -389,7 +389,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    while (true) {
+                    while (bandera) {
                         sleep(10000);
                         String temperatura = lblTemperatura.getText();
                         String nivel = lblNivel.getText();
