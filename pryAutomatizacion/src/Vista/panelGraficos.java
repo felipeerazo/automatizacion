@@ -31,6 +31,7 @@ public class panelGraficos extends javax.swing.JPanel {
     ImageIcon chorro;
     ImageIcon alcoholHirviendo;
     int altoFuego = 32;
+    int anchoFuego = 25;
     private int xFuego = 460;
 
     /**
@@ -62,9 +63,9 @@ public class panelGraficos extends javax.swing.JPanel {
         g.drawImage(imagenNivelInferior.getImage(), 10, (int) (40 - tanque.getNivel()), 500, 500, this);
         //fuego
         if (tanque.getNivel() != 0) {
-            g.drawImage(imagenFuego.getImage(), 248, xFuego, 25, altoFuego, this);
-            g.drawImage(imagenFuego.getImage(), 205, xFuego, 25, altoFuego, this);
-            g.drawImage(imagenFuego.getImage(), 290, xFuego, 25, altoFuego, this);
+            g.drawImage(imagenFuego.getImage(), 248, xFuego, anchoFuego, altoFuego, this);
+            g.drawImage(imagenFuego.getImage(), 205, xFuego, anchoFuego, altoFuego, this);
+            g.drawImage(imagenFuego.getImage(), 290, xFuego, anchoFuego, altoFuego, this);
         }
         //dibujo valores de las aperturas de las válvulas
         g.setColor(Color.WHITE);
@@ -128,11 +129,13 @@ public class panelGraficos extends javax.swing.JPanel {
 
     void bajarTemperatura() {
         altoFuego = 20;
+        anchoFuego = 18;
         xFuego = 470;
     }
 
     void aumentarTemperatura() {
         altoFuego = 32;
+        anchoFuego = 25;
         xFuego = 460;
     }
 }
