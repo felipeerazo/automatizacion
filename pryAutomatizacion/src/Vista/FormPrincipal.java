@@ -17,7 +17,7 @@ import javax.swing.JButton;
  * @author Felipe Erazo Guerrero
  */
 public class FormPrincipal extends javax.swing.JFrame {
-    
+
     boolean bandera = true;
     int caudalMax = 10;
     private boolean on;
@@ -27,14 +27,14 @@ public class FormPrincipal extends javax.swing.JFrame {
     private boolean bandera2 = true;
     boolean hervir = false;
     boolean banderaHervir = true;
-    
+
     public FormPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
         insertar();
         hervir();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -53,6 +53,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btnEncender = new javax.swing.JButton();
         btnRegistros = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        lblTemperatura1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 102, 255));
@@ -95,7 +97,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         ContenedorInfo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Temperatura:");
+        jLabel1.setText("Temperatura (°C):");
 
         lblTemperatura.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblTemperatura.setText("0");
@@ -107,7 +109,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         jLabel2.setText("Nivel (m" + String.valueOf((char) 179) + "):");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Caudal Q1:");
+        jLabel3.setText("Caudal Q1 (m"+ String.valueOf((char) 179) +"/seg):");
 
         lblQ1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblQ1.setText("0");
@@ -116,7 +118,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         lblQ2.setText("0");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Caudal Q2:");
+        jLabel4.setText("Caudal Q2 (m"+ String.valueOf((char) 179) +"/seg):");
 
         btnEncender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/apagado1.png"))); // NOI18N
         btnEncender.setBorder(null);
@@ -143,6 +145,12 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Volumen total (m" + String.valueOf((char) 179) + "):");
+
+        lblTemperatura1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblTemperatura1.setText("300");
+
         javax.swing.GroupLayout ContenedorInfoLayout = new javax.swing.GroupLayout(ContenedorInfo);
         ContenedorInfo.setLayout(ContenedorInfoLayout);
         ContenedorInfoLayout.setHorizontalGroup(
@@ -152,7 +160,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 .addComponent(btnEncender)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContenedorInfoLayout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnRegistros)
                     .addGroup(ContenedorInfoLayout.createSequentialGroup()
@@ -160,13 +168,15 @@ public class FormPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
                         .addGap(27, 27, 27)
                         .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNivel)
                             .addComponent(lblQ1)
                             .addComponent(lblQ2)
-                            .addComponent(lblTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblTemperatura, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTemperatura1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(29, 29, 29))
         );
 
@@ -179,7 +189,11 @@ public class FormPrincipal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ContenedorInfoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnEncender)
-                .addGap(91, 91, 91)
+                .addGap(63, 63, 63)
+                .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(lblTemperatura1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ContenedorInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblTemperatura))
@@ -299,7 +313,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormPrincipal().setVisible(true);
-                
+
             }
         });
     }
@@ -313,10 +327,12 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblNivel;
     private javax.swing.JLabel lblQ1;
     private javax.swing.JLabel lblQ2;
     private javax.swing.JLabel lblTemperatura;
+    private javax.swing.JLabel lblTemperatura1;
     private Vista.panelGraficos panelGraficos1;
     // End of variables declaration//GEN-END:variables
 
@@ -330,7 +346,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void encender() {
         bandera = true;
         new Thread() {
@@ -357,18 +373,20 @@ public class FormPrincipal extends javax.swing.JFrame {
                         Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                
+
             }
         }.start();
     }
-    
+
     private void cambiarIcono(String ruta, JButton boton) {
         boton.setIcon(new ImageIcon(getClass().getResource(ruta)));
     }
-    
+
     private void apagar() {
         bandera = false;
         panelGraficos1.q1.setApertura(0);
+        panelGraficos1.tanque.setTemperatura(0);
+        i=0;
         new Thread() {
             @Override
             public void run() {
@@ -396,9 +414,9 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         }.start();
     }
-    
+
     private void insertar() {
-        
+
         new Thread() {
             @Override
             public void run() {
@@ -417,7 +435,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         }.start();
     }
-    
+
     private void hervir() {
         new Thread() {
             @Override
@@ -448,7 +466,7 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         }.start();
     }
-    
+
     private void calcularTemperatura() {
         if (bandera2) {
             i++;
@@ -456,9 +474,13 @@ public class FormPrincipal extends javax.swing.JFrame {
             i--;
         }
         panelGraficos1.tanque.setTemperatura((float) (14.512 * i) / panelGraficos1.tanque.getNivel() + 25);
-        if (panelGraficos1.tanque.getTemperatura() > (float) 100 && panelGraficos1.tanque.getNivel() != 0) {
-            bandera2 = false;
-            panelGraficos1.bajarTemperatura();
+        if (panelGraficos1.tanque.getTemperatura() > (float) 100) {
+            if (panelGraficos1.tanque.getNivel() != 0) {
+                bandera2 = false;
+                panelGraficos1.bajarTemperatura();
+            } else {
+                panelGraficos1.tanque.setTemperatura(25);
+            }
         }
         if (panelGraficos1.tanque.getTemperatura() > 78.4 && panelGraficos1.tanque.getNivel() != 0) {
             panelGraficos1.imagenTanque = new ImageIcon(getClass().getResource("../Recursos/tanqueCaliente.png"));
