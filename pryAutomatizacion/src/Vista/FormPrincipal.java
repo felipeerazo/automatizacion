@@ -19,7 +19,7 @@ import javax.swing.JButton;
 public class FormPrincipal extends javax.swing.JFrame {
 
     boolean bandera = true;
-    int caudalMax = 10;
+    int caudalMax = 1;
     private boolean on;
     DAORegistros dao = new DAORegistros();
     FormRegistros fRegistros = new FormRegistros();
@@ -386,14 +386,16 @@ public class FormPrincipal extends javax.swing.JFrame {
         bandera = false;
         panelGraficos1.q1.setApertura(0);
         panelGraficos1.tanque.setTemperatura(0);
-        i=0;
+        i = 0;
+        bandera2=true;
         new Thread() {
             @Override
             public void run() {
-                while (panelGraficos1.tanque.getNivel() > 0 && !bandera) {
+                while (panelGraficos1.tanque.getNivel() > 1 && !bandera) {
                     if (panelGraficos1.tanque.getNivel() > 75) {
                         panelGraficos1.q2.setApertura(1);
-                    } else if (panelGraficos1.tanque.getNivel() > 50) {
+                    //} else if (panelGraficos1.tanque.getNivel() > 50) {
+                        } else {
                         panelGraficos1.q2.setApertura((float) 0.5);
                     }
                     panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() - caudalMax * panelGraficos1.q2.getApertura());
@@ -409,6 +411,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                 panelGraficos1.tanque.setNivel(0);
                 //panelGraficos1.q2.setApertura(0);                
                 lblNivel.setText("0.0");
+                lblQ1.setText("0.0");
                 lblQ2.setText("0.0");
                 lblTemperatura.setText("0.0");
             }
@@ -474,17 +477,20 @@ public class FormPrincipal extends javax.swing.JFrame {
             i--;
         }
         panelGraficos1.tanque.setTemperatura((float) (14.512 * i) / panelGraficos1.tanque.getNivel() + 25);
-        if (panelGraficos1.tanque.getTemperatura() > (float) 100) {
-            if (panelGraficos1.tanque.getNivel() != 0) {
+        if (panelGraficos1.q1.getCaudal() > 0) {
+            panelGraficos1.tanque.setTemperatura((panelGraficos1.tanque.getTemperatura() * panelGraficos1.tanque.getNivel() - panelGraficos1.q1.getCaudal() * caudalMax) / (panelGraficos1.tanque.getNivel() - panelGraficos1.q1.getCaudal() * caudalMax));
+        }
+        if (panelGraficos1.tanque.getTemperatura() > (float) 99) {
+            if (panelGraficos1.tanque.getNivel() > 0) {
                 bandera2 = false;
                 panelGraficos1.bajarTemperatura();
             } else {
                 panelGraficos1.tanque.setTemperatura(25);
             }
         }
-        if (panelGraficos1.tanque.getTemperatura() > 78.4 && panelGraficos1.tanque.getNivel() != 0) {
+        if (panelGraficos1.tanque.getTemperatura() > 78.4 && panelGraficos1.tanque.getNivel() > 0) {
             panelGraficos1.imagenTanque = new ImageIcon(getClass().getResource("../Recursos/tanqueCaliente.png"));
-            panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() - ((float) 0.00411 * i));
+            panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() - ((float) 0.000411 * i));
         }
         if (panelGraficos1.tanque.getTemperatura() < 60) {
             panelGraficos1.aumentarTemperatura();

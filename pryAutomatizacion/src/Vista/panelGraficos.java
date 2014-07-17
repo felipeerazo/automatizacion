@@ -73,6 +73,10 @@ public class panelGraficos extends javax.swing.JPanel {
         if (q1.getApertura() > 0 || tanque.getNivel() == 0) {
             imagenQ2 = new ImageIcon(getClass().getResource("../Recursos/g2Cerrada.png"));
             imagenQ1 = new ImageIcon(getClass().getResource("../Recursos/g1Abierta.gif"));
+            //dibujo del alcohol hirviendo
+            if (alcoholHirviendo != null) {
+                g.drawImage(alcoholHirviendo.getImage(), 10, (int) (40 - tanque.getNivel()), 500, 500, this);
+            }
             if (tanque.getNivel() == 0) {
                 imagenQ1 = new ImageIcon(getClass().getResource("../Recursos/g1Cerrada.png"));
             } else {
@@ -84,9 +88,6 @@ public class panelGraficos extends javax.swing.JPanel {
         }
         g.drawImage(imagenQ2.getImage(), 10, 40, 500, 500, this);
         g.drawImage(imagenQ1.getImage(), 10, 40, 500, 500, this);
-        if (alcoholHirviendo != null) {
-            g.drawImage(alcoholHirviendo.getImage(), 10, (int) (40 - tanque.getNivel()), 500, 500, this);
-        }
         repaint();
     }
 
@@ -126,13 +127,11 @@ public class panelGraficos extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     void bajarTemperatura() {
-        System.out.println("bajo temperatura");
-        altoFuego = 22;
+        altoFuego = 20;
         xFuego = 470;
     }
-    
+
     void aumentarTemperatura() {
-        System.out.println("bajo temperatura");
         altoFuego = 32;
         xFuego = 460;
     }
