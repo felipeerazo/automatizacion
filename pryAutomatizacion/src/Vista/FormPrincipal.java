@@ -19,6 +19,8 @@ import javax.swing.JButton;
 public class FormPrincipal extends javax.swing.JFrame {
 
     boolean bandera = true;
+    int x;
+    int y;
     int caudalMax = 1;
     private boolean on;
     DAORegistros dao = new DAORegistros();
@@ -257,6 +259,22 @@ public class FormPrincipal extends javax.swing.JFrame {
             .addComponent(Background, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                x = evt.getX();
+                y = evt.getY();
+            }
+        });
+        //DEJA DE MOVER EL JFRAME AL DEJAR DE PRESIONAR EL BOTON DERECHO DEL MOUSE
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                java.awt.Point point = java.awt.MouseInfo.getPointerInfo().getLocation();
+                setLocation(point.x - x, point.y - y);
+            }
+        });
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -387,15 +405,15 @@ public class FormPrincipal extends javax.swing.JFrame {
         panelGraficos1.q1.setApertura(0);
         panelGraficos1.tanque.setTemperatura(0);
         i = 0;
-        bandera2=true;
+        bandera2 = true;
         new Thread() {
             @Override
             public void run() {
                 while (panelGraficos1.tanque.getNivel() > 1 && !bandera) {
                     if (panelGraficos1.tanque.getNivel() > 75) {
                         panelGraficos1.q2.setApertura(1);
-                    //} else if (panelGraficos1.tanque.getNivel() > 50) {
-                        } else {
+                        //} else if (panelGraficos1.tanque.getNivel() > 50) {
+                    } else {
                         panelGraficos1.q2.setApertura((float) 0.5);
                     }
                     panelGraficos1.tanque.setNivel(panelGraficos1.tanque.getNivel() - caudalMax * panelGraficos1.q2.getApertura());
